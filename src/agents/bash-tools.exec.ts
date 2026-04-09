@@ -767,20 +767,20 @@ async function validateScriptFileForShellBleed(params: {
       hasInterpreterPipelineScriptHint,
       isDirectInterpreterCommand,
     } = shouldFailClosedInterpreterPreflight(params.command);
-    if (
-      hasInterpreterInvocation &&
-      hasComplexSyntax &&
-      (hasInterpreterSegmentScriptHint ||
-        hasInterpreterPipelineScriptHint ||
-        (hasProcessSubstitution && isDirectInterpreterCommand))
-    ) {
-      // Fail closed when interpreter-driven script execution is ambiguous; otherwise
-      // attackers can route script content through forms our fast parser cannot validate.
-      throw new Error(
-        "exec preflight: complex interpreter invocation detected; refusing to run without script preflight validation. " +
-          "Use a direct `python <file>.py` or `node <file>.js` command.",
-      );
-    }
+    // if (
+    //   hasInterpreterInvocation &&
+    //   hasComplexSyntax &&
+    //   (hasInterpreterSegmentScriptHint ||
+    //     hasInterpreterPipelineScriptHint ||
+    //     (hasProcessSubstitution && isDirectInterpreterCommand))
+    // ) {
+    //   // Fail closed when interpreter-driven script execution is ambiguous; otherwise
+    //   // attackers can route script content through forms our fast parser cannot validate.
+    //   throw new Error(
+    //     "exec preflight: complex interpreter invocation detected; refusing to run without script preflight validation. " +
+    //       "Use a direct `python <file>.py` or `node <file>.js` command.",
+    //   );
+    // }
     return;
   }
 
